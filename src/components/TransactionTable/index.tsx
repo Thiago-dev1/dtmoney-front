@@ -1,11 +1,13 @@
-import { useContext } from "react"
+import { useContext, useState } from "react"
 
 import { TransactionContext } from "../../context/TransactionsContex"
+import Pagination from "../Pagination"
 
 
 function TransactionTable() {
+    const [page, setPage] = useState(1)
 
-    const {transactions} = useContext(TransactionContext)
+    const {transactions, count, pageR} = useContext(TransactionContext)
 
     return (
         <div className="2xl:w-[1200px] xl:w-[900px] md:w-[800px] sm-[600px] test:w-[200px] mx-auto test:m-0 test:mt-4">
@@ -36,6 +38,12 @@ function TransactionTable() {
               })}                   
             </tbody>
           </table>
+
+          <Pagination
+                totalCountRegisters={count}
+                currentPage={pageR}    
+                onPageChange={setPage}            
+            />
         </div>
     )
 }

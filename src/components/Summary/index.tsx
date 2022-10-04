@@ -18,7 +18,7 @@ function Summary() {
 
   const [summary, setSummary] = useState<SummaryProps>({total:0, totalD:0, totalW:0})
 
-  const {search} = useContext(TransactionContext)
+  const {search, page} = useContext(TransactionContext)
 
   async function fetchData() {
     let response = await api.get("/transaction/summary")
@@ -37,25 +37,32 @@ function Summary() {
   async function handleTotal() {
     const type = ""
     const take = 3
-    const skip  = 0
+    const pageR  = 0
 
-    await search({type: type as string, take, skip})
+    await page(1)
+
+    await search({type: type as string, take, pageR})
   } 
 
   async function handleDeposit() {
     const type = "deposit"
     const take = 3
-    const skip  = 0
+    const pageR  = 0
 
-    await search({type: type as string, take, skip})
+    await page(1)
+
+    await search({type: type as string, take, pageR})
   }
 
   async function handleWithdraw() {
     const type = "withdraw"
     const take = 3
-    const skip  = 0
+    const pageR  = 0
 
-    await search({type: type as string, take, skip})
+    await page(1)
+
+
+    await search({type: type as string, take, pageR})
   }
 
   return (  
