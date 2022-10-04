@@ -2,6 +2,7 @@ import * as Dialog from "@radix-ui/react-dialog"
 
 import Header from "../components/Header"
 import NewTransactionModal from "../components/NewTransationModal"
+import Pagination from "../components/Pagination"
 import Summary from "../components/Summary"
 import TransactionTable from "../components/TransactionTable"
 
@@ -19,6 +20,7 @@ function Home() {
             <Summary />
 
             <TransactionTable/>
+            <Pagination />
         </div>
     )
 }

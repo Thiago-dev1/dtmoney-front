@@ -23,7 +23,7 @@ function TransactionTable() {
                 return (
                   <tr key={transaction.id} className="border-b-8 border-[#202024]">
                     <td className='text-[#C4C4CC] px-8 py-4 test:hidden'>{transaction.title}</td>
-                    <td className={`text-[#C4C4CC] px-8 py-4 ${transaction.amount < 0 ? "text-red-500" : "text-green-600"}`}>{new Intl.NumberFormat('pt-BR', {
+                    <td className={`px-8 py-4 ${transaction.amount < 0 ? "text-red-500" : "text-green-600"}`}>{new Intl.NumberFormat('pt-BR', {
                       style: 'currency',
                       currency: 'BRL'
                     }).format(transaction.amount)}</td>

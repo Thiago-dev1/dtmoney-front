@@ -13,6 +13,7 @@ interface TransactionProps {
   interface TransactionContextData {
     search(type: searchPros): Promise<void>
     transactions: TransactionProps[]
+    type: string
   }
 
 interface TransactionProvaiderProps {
@@ -20,32 +21,44 @@ interface TransactionProvaiderProps {
 }
 
 interface searchPros {
-    type: string
+    type: string,
+    take: number,
+    skip: number
 }
 
 export const TransactionContext = createContext({} as TransactionContextData)
 
 export function TransactionProvaider({children}: TransactionProvaiderProps) {
-    const [transactions, setTransactions] = useState<TransactionProps[]>([])  
+    const [transactions, setTransactions] = useState<TransactionProps[]>([])
+    const [type, setType] = useState<string>('')  
 
     useEffect(() => {
-     api.get("/transaction")
-      .then(response => setTransactions(response.data.transaction))
+     api.get("/transaction", {
+        params: {
+            take: 3,
+            skip: 0
+        }
+     })
+      .then(response => setTransactions(response.data.all))
+
       
     }, [])
 
-    async function search({type}: searchPros) {
+    async function search({type, take, skip}: searchPros) {
         const response = await api.get("/transaction", {
             params: {
-                type: type
+                type: type,
+                take,
+                skip
             }
         })
-        setTransactions(response.data.transaction)
+        setTransactions(response.data.all)
+        setType(type)
 
     }
 
     return (
-        <TransactionContext.Provider value={{search, transactions}}>
+        <TransactionContext.Provider value={{search, transactions, type}}>
             {children}
         </TransactionContext.Provider>
     )

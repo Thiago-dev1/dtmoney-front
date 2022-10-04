@@ -36,20 +36,26 @@ function Summary() {
 
   async function handleTotal() {
     const type = ""
+    const take = 3
+    const skip  = 0
 
-    await search({type: type as string})
+    await search({type: type as string, take, skip})
   } 
 
   async function handleDeposit() {
     const type = "deposit"
+    const take = 3
+    const skip  = 0
 
-    await search({type: type as string})
+    await search({type: type as string, take, skip})
   }
 
   async function handleWithdraw() {
     const type = "withdraw"
+    const take = 3
+    const skip  = 0
 
-    await search({type: type as string})
+    await search({type: type as string, take, skip})
   }
 
   return (  
